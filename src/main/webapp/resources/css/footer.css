@@ -1,0 +1,81 @@
+@charset "UTF-8";
+	/*footer*/
+
+.ftrWrap{
+	 background: #50a3a2;
+  	 background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
+ 	 background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+ 	 position : relative;
+}
+.ftrWrap>.footer{
+    width: 90%; 
+    max-width: 1440px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 40px 0;
+}
+ .ftrWrap>.footer>.section{
+    color: #FFF; font-size: 14px;
+    overflow: hidden;
+}
+ .ftrWrap>.footer>.section>.fl{
+    margin: 0 auto;
+    float: left;
+}
+ .ftrWrap>.footer>.section>.fl>.mn{
+    overflow: hidden;
+}
+ .ftrWrap>.footer>.section>.fl>.mn>li{
+    float: left; margin-right: 40px;
+    line-height: 40px; 
+    cursor: pointer;
+}
+ .ftrWrap>.footer>.section>.fl>.svc{
+    
+}
+ .ftrWrap>.footer>.section>.fl>.svc>li{
+    line-height: 40px;
+    
+}
+ .ftrWrap>.footer>.section>.fr{
+    float: right;
+    cursor: pointer;
+}
+ .ftrWrap>.footer>.section>.fr>.sltBox{
+    margin-top: 40px; 
+}
+ .ftrWrap>.footer>.section>.fr>.sltBox>select{
+    border: 0; 
+}
+ .ftrWrap>.footer>.section>.fr>.snsGroup{
+    font-size: 25px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+ .ftrWrap>.footer>.section>.fr>.snsGroup>nav{
+    float: left;
+}
+ .ftrWrap>.footer>.section>.fr>.snsGroup>nav>i{
+    margin: 0 10px;
+    text-align: center;
+}
+ .ftrWrap>.footer>.section>.fr>.sltBox>select{
+    display: block; margin-left: auto; margin-right: 10px;
+}
+.ftrWrap>.footer>.section>.fr>.sltBox>select>option{}
+.ftrWrap>.footer>hr{
+    width: 100%; height: 1px;
+    background-color: #fff;
+    display: inline-block;
+}
+.ftrWrap>.footer>.header{
+    overflow: hidden;
+}
+.ftrWrap>.footer>.header>h1{
+    float: left;
+}
+.ftrWrap>.footer>.header>p{
+    color: #FFF; font-size: 14px;
+    float: left;
+    line-height: 40px;
+}

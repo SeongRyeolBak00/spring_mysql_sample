@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="org.zerock.mapper.AdminMapper">
+  
+    <!-- 카테고리 리스트 -->
+  	<select id="cateList" resultType="org.zerock.domain.CateVO">
+  		select * from tbl_cate order by cateCode
+  	</select>
+  	
+    <!-- 상품 등록 -->
+  	<insert id="productRegister">
+  	  	<selectKey resultType="int" keyProperty="productCode" order="AFTER">
+  			SELECT LAST_INSERT_ID()
+  		</selectKey>		
+  		insert into tbl_product(productName, cateCode, contents, productPrice, stock)
+		values(#{productName}, #{cateCode},#{contents},#{productPrice},#{stock})
+  	</insert>
+
+	<!-- 상품 목록 --> 
+	<select id="productList" resultType="org.zerock.domain.ProductVO">
+	 select productCode, productName, (select cateName from tbl_cate where cateCode =tbl_product.cateCode) cateName, cateCode, productPrice, stock, contents from tbl_product order by productCode
+	</select>
+
+	<!-- 상품 조회  --> 
+	<select id="productView" resultType="org.zerock.domain.ProductVO">
+		select productCode, productName, cateCode, (select cateName from tbl_cate where cateCode=tbl_product.cateCode)cateName, productPrice, stock, contents 
+	  from tbl_product where productCode=#{productCode}
+	</select>
+	
+	<!-- 상품 정보 수정 -->
+	<update id="productModify">
+		update tbl_product set productName = #{productName}, cateCode = #{cateCode}, productPrice = #{productPrice}, stock = ${stock}, contents = #{contents}
+		where productCode = ${productCode}
+	</update>
+	
+	<!-- 상품 정보 삭제 -->
+	<delete id="productDelete">
+		delete from tbl_product where productCode = #{productCode}
+	</delete>
+	
+	<!-- 이미지 등록 -->
+	<insert id="imageEnroll">
+		insert into tbl_image(productCode, fileName, uploadPath, uuid) values (#{productCode}, #{fileName}, #{uploadPath}, #{uuid})
+	</insert>
+	
+		<!-- 지정 상품 이미지 전체 삭제 --> 
+	<delete id="deleteImageAll">
+		delete FROM tbl_image where productCode = #{productCode}
+	</delete>
+  </mapper>

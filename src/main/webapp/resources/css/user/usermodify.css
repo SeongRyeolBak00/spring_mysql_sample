@@ -1,0 +1,189 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+	font-family:sans-serif;
+	text-decoration:none;
+	box-sizing:border-box;
+}
+body{
+	min-height:120vh;
+	background-color: #ff9068;
+	background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
+	background: linear-gradient(to right, #ff9068, #fd746c);
+	D 0%, #B721FF 100%);
+}
+
+/* 화면 전체 렙 */
+.wrapper{
+	width : 600px;
+	background-color : #f1f1f1;
+	height : 900px;
+	padding : 60px 40px;
+	border-radius: 10px;
+	position : absolute;
+	left : 50%;
+	top:50%;
+	transform : translate(-50%,-50%);
+}
+/* content 랩 */
+.wrap{
+	width : 600px;
+    background-color : #f1f1f1;
+    height : 800px;
+    padding : 80px 40px;
+    border-radius: 10px;
+    position : absolute;
+    left : 50%;
+    top:50%;
+    transform : translate(-50%,-50%);
+}
+
+/* 페이지 제목 */
+.top_title_area{
+	width: 100%;
+    height: 80px;
+}
+.top_title_area span{
+	padding: 190px;
+	margin-bottom: 20px;
+ 	font-size: 20px; 
+    color: #ff9068;
+}
+/* 메일 영역 */
+.mail_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.mail_name{
+	font-size:15px;
+    font-weight: bold;
+}
+.mail_input_box{
+	border: 2px solid #adadad;
+	height:31px;
+	padding: 1px 2px;	
+}
+
+/* 비밀번호 영역 */
+.pw_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.pw_name{
+	font-size:15px;
+    font-weight: bold;
+}
+.pw_input_box{
+	border: 2px solid #adadad;
+	height:31px;
+	padding: 1px 2px;	
+	
+}
+.pw_input{
+	width:100%;
+	height:100%;
+	border:none;
+	font-size:15px;
+}
+
+/* 비밀번호 확인 영역 */
+.pwck_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.pwck_name{
+	font-size:15px;
+    font-weight: bold;
+}
+.pwck_input_box{
+	border: 2px solid #adadad;
+	height:31px;
+	padding: 1px 2px;	
+	
+}
+.pwck_input{
+	width:100%;
+	height:100%;
+	border:none;
+	font-size:15px;
+}
+
+/* 이름 영역 */
+.user_wrap{
+	width: 100%;
+    margin-top: 20px;
+}
+.user_name{
+	font-size:15px;
+    font-weight: bold;
+}
+.user_input_box{
+	border: 2px solid #adadad;
+	height:31px;
+	padding: 1px 2px;	
+	
+}
+.user_input{
+	width:100%;
+	height:100%;
+	border:none;
+	font-size:15px;
+}
+
+.modify_button_wrap{
+/*     border: 1px solid #ff9068; */
+    height: 10px;
+    width: 100%;
+    margin:35px auto;
+    float: right;
+    line-height: 30px;
+    text-align: center;
+	font-size:15px;
+    font-weight: 900;
+    border-radius:10px;
+    position:relative;
+}
+
+.modify_button{
+	display : block; 
+	width :100%;
+	height : 50px; 
+	border : none; 
+	background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
+	background: linear-gradient(120deg, #ff9068, #fd746c);
+	D 0%, #B721FF 100%);
+	border-radius : 10px;
+	background-size : 200%;
+	border-color: white;
+	color : #fff; 
+	outline : none ;
+	cursor : pointer;
+	transition :.5s;   
+}
+
+/* 유효성 검사 문구 */
+.final_pw_ck{
+	display: none;
+}
+.final_pwck_ck{
+	display: none;
+}
+.final_name_ck{
+	display: none;
+}
+
+/* 비밀번호 확인 일치 유효성검사 */
+.pwck_input_re_1{
+		color : green;
+		display : none;	
+}
+.pwck_input_re_2{
+		color : red;
+		display : none;	
+}
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}

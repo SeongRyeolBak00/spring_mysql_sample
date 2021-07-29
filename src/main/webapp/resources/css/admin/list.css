@@ -1,0 +1,61 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding:0;
+}
+a{
+	text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+/* 화면 전체 렙 */
+.wrapper{
+	width: 100%;
+}
+/* content 랩 */
+.wrap{
+	width : 1080px;
+	margin: auto;
+}
+
+/* 상품 목록 영역 */
+.product_table_wrap{
+	padding: 20px 35px
+}
+.product_table{
+	width: 70%;
+    border: 1px solid #d3d8e1;
+    text-align: center;
+    border-collapse: collapse;
+}
+.product_table td{
+	padding: 10px 5px;
+	border : 1px solid #e9ebf0;
+}
+.product_table thead{
+	background-color: #f8f9fd;	
+	font-weight: 600;
+}
+.product_table a{
+	color:#1088ed;
+	font-weight: 500;
+}
+.th_column_1{
+	width:120px;
+}
+.th_column_3{
+	width:120px;
+}
+.th_column_4{
+	width:180px;
+}
+.th_column_5{
+	width:180px;
+}
+
+
+/* float 속성 해제 */
+.clearfix{
+	clear: both;
+}
