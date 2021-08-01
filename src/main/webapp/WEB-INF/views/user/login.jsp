@@ -49,7 +49,6 @@
 					
 					<div class="row"><button type="button" id="login-button" class="login_button">로그인</button></div>
 					<br>
-						<a href="/user/userfind">회원정보를 잊으셨나요?</a>
 					<br>
 						<a href="/user/join">아직 회원이 아니신가요?</a>
 				</div>

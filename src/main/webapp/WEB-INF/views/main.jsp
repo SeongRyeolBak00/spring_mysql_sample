@@ -63,13 +63,13 @@
                             <div class="badge bg-warning text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
                             <a href="/product/shop"> <!-- 예시페이지-->
-                            <img class="card-img-top" src="resources/images/banana.jpg" alt="..." />
+                            <img class="card-img-top" src="resources/images/product-11-720x480.jpg" alt="..." />
                             </a>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">당도높은 바나나</h5>
+                                    <h5 class="fw-bolder">하루 한끼 샐러드</h5>
                                     <!-- Product reviews-->
                                     <div class="d-flex justify-content-center small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
@@ -79,8 +79,7 @@
                                         <div class="bi-star-fill"></div>
                                     </div>
                                     <!-- Product price-->
-                                    <span class="text-muted text-decoration-line-through">9,200원</span>
-                                    7,500원
+                                    8,500원
                                 </div>
                             </div>
                             <!-- Product actions-->

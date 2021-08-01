@@ -22,6 +22,7 @@ import org.zerock.domain.CateVO;
 import org.zerock.domain.ProductVO;
 import org.zerock.mapper.AttachMapper;
 import org.zerock.service.AdminService;
+import org.zerock.service.AttachService;
 import org.zerock.service.ProductService;
 
 import lombok.AllArgsConstructor;
@@ -38,6 +39,8 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private AttachService attachService;
 	
 	//메인 페이지 이동
 	@GetMapping("/main")
@@ -68,6 +71,16 @@ public class ProductController {
 		}
 		return result;
 	}
+	/* 이미지 정보 반환 
+	@GetMapping(value="/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachImageVO>> getAttachList(@RequestParam("n") int productCode, Model model){
+		log.info("getAttachList.........." + productCode);
+		ResponseEntity<List<AttachImageVO>> result = new ResponseEntity<List<AttachImageVO>>(attachMapper.getAttachList(productCode), HttpStatus.OK);
+		model.addAttribute("result",result);
+		return result;
+	
+	}*/
+	
 	/* 이미지 정보 반환 */
 	@GetMapping(value="/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<AttachImageVO>> getAttachList(int productCode){
@@ -77,7 +90,7 @@ public class ProductController {
 	
 	 /*  카테고리별 상품 리스트  */
 	 @GetMapping("/product/list")
-	 public void productList(@RequestParam("c") int cateCode,Model model) {
+	 public void productList(@RequestParam("c") int cateCode, Model model) {
 		log.info("get llist");
 		List<ProductVO> list = productService.productList(cateCode);
 	 

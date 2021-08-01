@@ -29,11 +29,11 @@
 					
 					<div class="user_withdrawal_causeck">
 						<input type="radio" name="cause" id="cause1"/>
-						<label for="cause1">없어요.</label>
+						<label for="cause1">이용하지 않습니다</label>
 						<input type="radio" name="cause" id="cause2"/>
-						<label for="cause2">이유 1</label>
+						<label for="cause2">다른 마켓보다 가격이 비싸다</label>
 						<input type="radio" name="cause" id="cause3"/>
-						<label for="cause3">그냥 맘에 안들어요.</label>
+						<label for="cause3">어려운 사용법</label>
 					</div>
 					
 				</div>	

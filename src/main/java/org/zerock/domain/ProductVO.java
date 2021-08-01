@@ -26,6 +26,18 @@ public class ProductVO {
 	
 	/* 이미지 정보 */
 	private List<AttachImageVO> imageList;
+	/* 경로 */
+	private String uploadPath;
+	public String getUploadPath() {
+		return uploadPath;
+	}
+
+	public void setUploadPath(String uploadPath) {
+		this.uploadPath = uploadPath;
+	}
+
+	/* 파일 이름 */
+	private String fileName;
 
 	public List<AttachImageVO> getImageList() {
 		return imageList;
@@ -93,8 +105,9 @@ public class ProductVO {
 	
 	@Override
 	public String toString() {
-		return "ProductVO [productCode=" + productCode + ", productName=" + productName + ", cateCode=" + cateCode + ", cateName=" + cateName
-				+ ", contents=" + contents + ", productPrice=" + productPrice + ", Stock=" + Stock + ", imageList=" + imageList+"]";
+		return "ProductVO [productCode=" + productCode + ", productName=" + productName + ", cateCode=" + cateCode
+				+ ", cateName=" + cateName + ", contents=" + contents + ", productPrice=" + productPrice + ", Stock="
+				+ Stock + ", imageList=" + imageList + ", uploadPath=" + uploadPath + ", fileName=" + fileName + "]";
 	}
 
 }
