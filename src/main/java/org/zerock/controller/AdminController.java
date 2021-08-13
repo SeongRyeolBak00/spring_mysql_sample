@@ -30,6 +30,7 @@ import org.zerock.domain.AttachImageVO;
 import org.zerock.domain.CateVO;
 import org.zerock.domain.ProductVO;
 import org.zerock.service.AdminService;
+import org.zerock.service.AttachService;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnails;
@@ -40,6 +41,8 @@ import net.sf.json.JSONArray;
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private AttachService attachService;
 	
 	/* 관리자 메인 페이지 이동 */
 	@GetMapping(value="main")
@@ -95,6 +98,7 @@ public class AdminController {
 		rttr.addFlashAttribute("delete_result", result);
 		return "redirect:/admin/list";
 	}
+	
 	/* 첨부 파일 업로드 */
 	@PostMapping(value="/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<AttachImageVO>> uploadAjaxAction(MultipartFile[] uploadFile) {

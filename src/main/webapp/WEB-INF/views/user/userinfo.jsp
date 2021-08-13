@@ -26,6 +26,8 @@
 		<div class="user_info_area">
 			<span>아이디 : ${user.userId}</span>
 			<span>이름 : ${user.userName}</span>
+			<span>이메일 : ${user.userMail}</span>
+			<span>휴대폰번호 : ${user.userPhone}</span>
 			<span>충전금액 : <fmt:formatNumber value="${user.money }" pattern="\#,###.##"/></span>
 			<span>포인트 : <fmt:formatNumber value="${user.point }" pattern="#,###" /></span>
 		</div>

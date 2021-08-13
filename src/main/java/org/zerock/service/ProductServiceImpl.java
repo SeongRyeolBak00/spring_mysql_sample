@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.CateVO;
 import org.zerock.domain.ProductVO;
+import org.zerock.domain.ReplyVO;
 import org.zerock.mapper.AdminMapper;
 import org.zerock.mapper.AttachMapper;
 import org.zerock.mapper.ProductMapper;
@@ -40,5 +41,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductVO productView(int productCode) {
 		return productMapper.productView(productCode);
+	}
+	/* 리뷰  작성 */
+	@Override
+	public void replyRegister(ReplyVO reply) {
+		productMapper.replyRegister(reply);
+	}
+	/* 카테고리 리스트 */
+	@Override
+	public List<ReplyVO> replyList(int productCode) {
+		return productMapper.replyList(productCode);
 	}
 }

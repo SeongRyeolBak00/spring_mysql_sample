@@ -1,7 +1,5 @@
 package org.zerock.mapper;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,10 +87,14 @@ public class AdminMapperTests {
 		mapper.imageEnroll(image);
 	}
 	/* 지정 상품 이미지 삭제 */
-	@Test
+	//@Test
 	public void deleteImageAllTest() {
 		int productCode = 28;
 		mapper.deleteImageAll(productCode);
 	}
-	
+	/* 어제자 날짜 이미지 리스트 */
+	@Test
+	public void checkImageListTest() {
+		mapper.checkFileList();
+	}
 }

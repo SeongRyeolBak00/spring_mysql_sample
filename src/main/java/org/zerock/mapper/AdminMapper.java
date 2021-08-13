@@ -23,4 +23,6 @@ public interface AdminMapper {
 	public void imageEnroll(AttachImageVO image);
 	/* 지정 상품 이미지 전체 삭제 */
 	public void deleteImageAll(int productCode);
+	/* 어제자 날짜 이미지 리스트 */
+	public List<AttachImageVO> checkFileList();
 }

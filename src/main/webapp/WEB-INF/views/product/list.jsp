@@ -39,37 +39,35 @@
                             <div class="badge bg-warning text-white position-absolute" style="top: 0.5rem; right: 0.5rem">인기상품</div>-->
                             <!-- Product image-->
                             <div id="uploadResult">
-                            	<div id=result_card>
-									<img class="card-img-top" src="/display?fileName=${product.fileName}/${product.fileName}">
-									<script>
-					var uploadResult = $("#uploadResult");			
-				
-					$.getJSON("/getAttachList", {productCode : productCode}, function(arr){	
-						if(arr.length === 0){			
-							var str = "";
-							str += "<div id='result_card'>";
-							str += "<img src='/resources/images/NoImage.png'>";
-							str += "</div>";
-							uploadReslut.html(str);	
-						}
-						
-						console.log(arr);
-						var str = "";
-						var obj = arr[0];	
-							
-						var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
-						str += "<div id='result_card'";
-						str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
-						str += ">";
-						str += "<img class='card-img-top' src='/display?fileName=" + fileCallPath +"'>";
-						str += "</div>";		
-						uploadReslut.html(str);									
-					});	
-				});	
-				</script>
-								</div>
+								<!-- <div id="result card">
+									<img class="card-img-top" src="/display?fileName=${product.uploadPath}">
+								</div> -->
 							</div>
-                            <!-- Product details-->
+							<script>
+							var productCode = '<c:out value="${product.productCode}"/>';
+							$.getJSON("/getAttachList", {productCode : productCode}, function(arr){	
+								if(arr.length === 0){			
+									var str = "";
+									str += "<div id='result_card'>";
+									str += "<img src='/resources/images/NoImage.png'>";
+									str += "</div>";
+									$("#uploadResult").html(str);	
+								}
+								
+								console.log(arr);
+								var str = "";
+								var obj = arr[0];	
+									
+								var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+								str += "<div id='result_card'";
+								str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+								str += ">";
+								str += "<img class='card-img-top' src='/display?fileName=" + fileCallPath +"'>";
+								str += "</div>";		
+								$("#uploadResult").html(str);									
+							});	
+							</script>
+                            <!-- Product details <div><img :src="'images2/'+product.images[0].filename" width="200" height="200"></div>-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
@@ -100,30 +98,6 @@
 
 <script>
 $(document).ready(function(){
-	/* 이미지 호출 */
-	var productCode = '<c:out value="${product.productCode}"/>';
-	var uploadResult = $("#uploadResult");			
-
-	$.getJSON("/getAttachList", {productCode : productCode}, function(arr){	
-		if(arr.length === 0){			
-			var str = "";
-			str += "<div id='result_card'>";
-			str += "<img src='/resources/images/NoImage.png'>";
-			str += "</div>";
-			uploadReslut.html(str);	
-		}
-		
-		console.log(arr);
-		var str = "";
-		var obj = arr[0];	
-			
-		var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
-		str += "<div id='result_card'";
-		str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
-		str += ">";
-		str += "<img class='card-img-top' src='/display?fileName=" + fileCallPath +"'>";
-		str += "</div>";		
-		uploadReslut.html(str);									
-	});	
+	
 });	
 </script>

@@ -11,14 +11,25 @@
 
 	<!-- 상품 목록 --> 
 	<select id="productList" resultType="org.zerock.domain.ProductVO">
-	 select productCode,productName, cateCode, productPrice, contents 
-	 from tbl_product where cateCode=#{cateCode}
+	 	select productCode,productName, cateCode, productPrice, contents 
+	 		from tbl_product where cateCode=#{cateCode}
 	</select>
 
 	<!-- 상품 조회  --> 
 	<select id="productView" resultType="org.zerock.domain.ProductVO">
 		select productCode, productName, cateCode, (select cateName from tbl_cate where cateCode=tbl_product.cateCode)cateName, productPrice, contents 
-	  from tbl_product where productCode=#{productCode}
+	 	 from tbl_product where productCode=#{productCode}
 	</select>
 	
+	<!-- 리뷰 작성 -->
+	<insert id="replyRegister">
+		 insert into tbl_reply (productCode, userId, reply, rating)
+	     	values (#{productCode}, #{userId}, #{reply}, #{rating})
+	</insert>
+	
+	<!-- 상품 소감(댓글) 리스트 -->
+	<select id="replyList" resultType="org.zerock.domain.ReplyVO">
+		 select productCode,userId, replyCode,reply, repDate, updateDate, rating from tbl_reply where productCode = #{productCode}
+	</select>
+		
   </mapper>

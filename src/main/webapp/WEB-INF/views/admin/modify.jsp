@@ -13,7 +13,7 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 </head>
@@ -22,7 +22,7 @@
 <%@include file="../includes/adminHeader.jsp" %>
 			<div class="admin_content_main">
 				<form id="modifyForm" action="/admin/modify" method="post">
-				
+
 			 	<div class="form_section">
 			        <div class="form_section_title">
 			        	<label>카테고리</label>
@@ -80,7 +80,9 @@
                     	<label>상품 이미지</label>
                     </div>
                     <div class="form_section_content">
-                    	<input type="file" id ="fileItem" name='uploadFile' style="height: 50px;">
+                    	<div class="form-group uploadDiv">
+                    		<input type="file" name='uploadFile' id ="fileItem" name='uploadFile' style="height: 50px;"  multiple="multiple">
+						</div>
 						<div id="uploadResult">
 						</div>
                     </div>
@@ -99,9 +101,31 @@
 
 <script>
 $(document).ready(function(){
+var formObj = $("form");
 /* 위지윅 적용 */
 ClassicEditor
-	.create(document.querySelector('#contents_textarea'))
+	.create(document.querySelector('#contents_textarea'),{
+		toolbar: {
+			  toolbar: [
+			        'heading', '|',
+			        'fontfamily', 'fontsize', '|',
+			        'alignment', '|',
+			        'fontColor', 'fontBackgroundColor', '|',
+			        'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+			        'link', '|',
+			        'outdent', 'indent', '|',
+			        'bulletedList', 'numberedList', 'todoList', '|',
+			        'code', 'codeBlock', '|',
+			        'insertTable', '|',
+			        'uploadImage', 'blockQuote', '|',
+			        'undo', 'redo'
+			    ],
+			    shouldNotGroupWhenFull: true
+		}
+	})
+	.then( editor => {
+		console.log( editor );
+	})
 	.catch(error=>{
 		console.error(error);
 	});
@@ -138,11 +162,12 @@ ClassicEditor
 	function deleteFile(){
 		$("#result_card").remove();
 	}
-	
+
 	/* 이미지 업로드 */
-	$("input[type='file']").on("change", function(e){
+	var cloneObj = $(".uploadDiv").clone(); 
+	$("input[type='file']").change(function(e){
 		let formData = new FormData();
-		let fileInput = $('input[name="uploadFile"]');
+		let fileInput = $("input[name='uploadFile']");
 		let fileList = fileInput[0].files;
 		//let fileObj = fileList[0];
 
@@ -162,6 +187,7 @@ ClassicEditor
 	    	success : function(result){
 	    		console.log(result);
 	    		showUploadImage(result);
+	    		$(".uploadDiv").html(cloneObj.html());
 	    	},
 	    	error : function(result){
 	    		alert("이미지 파일이 아닙니다.");
@@ -182,22 +208,21 @@ ClassicEditor
 		}
 		return true;		
 	}
-	
+
 	/* 이미지 출력 */
 	function showUploadImage(uploadResultArr){
-		
 		/* 전달받은 데이터 검증 */
 		if(!uploadResultArr || uploadResultArr.length == 0){return}
-		
 		let uploadResult = $("#uploadResult");
-		
 		let str = "";
 		$(uploadResultArr).each(function(i, obj){		
 			let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
-			
-			str += "<div id='result_card'>";
+			str += "<div id='result_card'";
+			str += "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid + "' data-filename='" + obj.fileName + "'";
+			str += ">";
 			str += "<img src='/display?fileName=" + fileCallPath +"'>";
 			str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";
+			console.log(obj);
 			str += "<input type='hidden' name='imageList["+i+"].fileName' value='"+ obj.fileName +"'>";
 			str += "<input type='hidden' name='imageList["+i+"].uuid' value='"+ obj.uuid +"'>";
 			str += "<input type='hidden' name='imageList["+i+"].uploadPath' value='"+ obj.uploadPath +"'>";		
@@ -205,7 +230,9 @@ ClassicEditor
 		});
 		uploadResult.append(str);     
 	}	
+
 });
+
 
 /* 삭제 버튼 */
 $("#deleteBtn").on("click", function(e){
@@ -220,6 +247,7 @@ $("#deleteBtn").on("click", function(e){
 	moveForm.submit();
 	}
 });
+
 /*컨트롤러에서 카테고리 데이터 받기*/
  var jsonData = JSON.parse('${category}');
  var cateArr = new Array();
@@ -234,6 +262,7 @@ $("#deleteBtn").on("click", function(e){
    cateArr.push(cateObj);
   }
  }
+ 
  /* 셀렉트 박스에 데이터 삽입*/
  var cateSelect = $("select.category");
  
@@ -241,7 +270,6 @@ $("#deleteBtn").on("click", function(e){
   cateSelect.append("<option value='" + cateArr[i].cateCode + "'>"
        + cateArr[i].cateName + "</option>"); 
  }
- 
 
  /* 목록 이동 버튼 */
  $("#listBtn").on("click", function(e){

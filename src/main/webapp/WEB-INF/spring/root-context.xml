@@ -38,6 +38,8 @@
 	
 	<tx:annotation-driven/>
 	
+	<task:annotation-driven/>	
+	
 	<mybatis-spring:scan base-package="org.zerock.mapper"/>
 	
 	<context:component-scan base-package="org.zerock.service"></context:component-scan>
@@ -49,8 +51,6 @@
 	<context:component-scan base-package="org.zerock.task"></context:component-scan>
 
 	<context:component-scan base-package="org.zerock.domain"></context:component-scan>
-	
-	<task:annotation-driven/>
 	
 	    <!-- navermail설정 -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 

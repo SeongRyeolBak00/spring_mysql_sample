@@ -16,7 +16,7 @@
   	
   	<!-- 로그인 -->
   	<select id="userLogin" resultType="org.zerock.domain.UserVO">
-  		select userId, userPw, userName, userAdmin, userPhone, money, point from tbl_user where userId = #{userId}
+  		select userId, userPw, userName, userMail, userAdmin, userPhone, money, point from tbl_user where userId = #{userId}
   	</select> 
   	
   	<!-- 회원 정보 -->
@@ -26,7 +26,7 @@
  	
  	<!-- 회원 정보 수정 -->
  	<update id="userUpdate">
- 		update tbl_user set userId = #{userId}, userPw = #{userPw}, userName = #{userName}, userMail = #{userMail}, updateDate = now() where userId = #{userId}
+ 		update tbl_user set userId = #{userId}, userPw = #{userPw}, userName = #{userName}, userMail = #{userMail}, userPhone= #{userPhone}, updateDate = now() where userId = #{userId}
  	</update>
  	
  	<!-- 회원 탈퇴 -->

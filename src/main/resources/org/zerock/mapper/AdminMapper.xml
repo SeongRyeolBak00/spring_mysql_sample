@@ -45,8 +45,13 @@
 		insert into tbl_image(productCode, fileName, uploadPath, uuid) values (#{productCode}, #{fileName}, #{uploadPath}, #{uuid})
 	</insert>
 	
-		<!-- 지정 상품 이미지 전체 삭제 --> 
+	<!-- 지정 상품 이미지 전체 삭제 --> 
 	<delete id="deleteImageAll">
 		delete FROM tbl_image where productCode = #{productCode}
 	</delete>
+	
+	<!-- 어제자 날자 이미지 리스트 -->
+	<select id="checkFileList" resultType="org.zerock.domain.AttachImageVO">
+		select * from tbl_image where uploadpath = DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 DAY), '%Y\%m\%d')	
+	</select>
   </mapper>

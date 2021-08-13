@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,12 +16,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.AttachImageVO;
 import org.zerock.domain.CateVO;
 import org.zerock.domain.ProductVO;
+import org.zerock.domain.ReplyVO;
+import org.zerock.domain.UserVO;
 import org.zerock.mapper.AttachMapper;
 import org.zerock.service.AdminService;
 import org.zerock.service.AttachService;
@@ -93,7 +98,6 @@ public class ProductController {
 	 public void productList(@RequestParam("c") int cateCode, Model model) {
 		log.info("get llist");
 		List<ProductVO> list = productService.productList(cateCode);
-	 
 		model.addAttribute("list",  list);
 	 }
 	 /* 상품 조회 */
@@ -102,5 +106,27 @@ public class ProductController {
 		 log.info("get view");
 		 ProductVO product = productService.productView(productCode);
 		 model.addAttribute("product", product);
+		 List<ReplyVO> reply = productService.replyList(productCode);
+		 model.addAttribute("reply", reply);
 	}
+	 /* 상품 조회-리뷰작성 */
+	 @PostMapping("/product/view")
+	 public String replyRegister(ReplyVO reply, HttpSession session) throws Exception {
+		 log.info("regist reply");
+		 UserVO user = (UserVO)session.getAttribute("user");
+		 reply.setUserId(user.getUserId());
+		 productService.replyRegister(reply);
+		 return "redirect:/product/view?n="+reply.getProductCode();
+	 } 
+	/* 리뷰 목록 */
+	 @ResponseBody
+	 @GetMapping("/product/view/replyList")
+	 public List<ReplyVO> replyList(@RequestParam("n") int productCode, Model model) throws Exception {
+		 log.info("get reply list");
+		 List<ReplyVO> reply = productService.replyList(productCode);
+		 model.addAttribute("reply", reply);
+
+		 return reply;
+	 } 
+	
 }

@@ -62,7 +62,9 @@ public class AdminServiceImpl implements AdminService {
 	/* 상품 삭제 */	
 	@Override
 	public int productDelete(int productCode) {
+		adminMapper.deleteImageAll(productCode);
 		return adminMapper.productDelete(productCode);
 	}
-	
+
+
 }

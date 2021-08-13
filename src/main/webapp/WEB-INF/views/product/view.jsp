@@ -11,7 +11,6 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Shop Item</title>
-        
 	    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">	    
 	    <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="/resources/assets/favicon.ico" />
@@ -19,7 +18,38 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="/resources/css/styles.css">
-
+        <script type="text/javascript" src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+		<script>
+		function replyList(){
+			var productCode = ${product.productCode};
+		 	$.getJSON("/product/view/replyList" + "?n=" + productCode, function(data){
+		  	var str = "";
+		 	$(data).each(function(){
+			   	console.log(data);
+			   	var repDate = new Date(this.repDate);
+			   	var result=this.rating;
+			   	repDate = repDate.toLocaleDateString("ko-US")
+			  	  for (var i = 0; i < result.length; i++){
+			  		document.write("5")
+				  };
+			    str += "<li data-productCode='" + this.productCode + "'>"
+			     + "<div class='userInfo'>"			    
+			     + "<span class='userId'>" + this.userId + "</span>"
+			     + "<span class='date'>" + repDate + "</span>"
+			     + "<span class='rating'>" + result + "</span>"
+			     + "</div>"
+			     + "<div><c:forEach var='reply' items='${reply}' varStatus='status' >★</c:forEach></div>"
+			     + "<div class='reply'>" + this.reply + "</div>"
+			     + "<div class='replyFooter'>"
+			     + "<button type='button' class='modify' data-replyCode='" + this.replyCode + "'>수정</button>"
+			     + "<button type='button' class='delete' data-replyCode='" + this.replyCode + "'>삭제</button>"
+			     + "</div>"
+			     + "</li>";           
+			  	});
+			  $("section.replyList ol").html(str);
+			 });
+		}
+		</script>
 </head>
 <body>
 <%@ include file="../includes/header.jsp"%>   
@@ -93,6 +123,57 @@
                     </div>
                 </div>
             </div>
+            
+            <div id="replyview">
+            	<c:if test="${user == null }">
+  					<p>소감을 남기시려면 <a href="/user/login">로그인</a>해주세요</p>
+ 				</c:if>
+
+ 				<c:if test="${user != null}">
+			 		<section class="replyForm">
+				  		<form role="form" method="post" autocomplete="off">
+				  		<input type="hidden" name="productCode" id="productCode" value="${product.productCode}">
+				  			<div class="rating">				  			     
+				  			     <fieldset>
+							        <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+							        <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+							        <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+							        <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+							        <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+							    </fieldset>
+				  			</div>
+				  			<div class="input_area">
+				  			    <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
+						   		<textarea name="reply" class="reply" id="reply" rows="5"></textarea>
+						    </div>
+<c:forEach var='reply' items='${reply}' varStatus='status' begin='1' end="3">${reply.rating}★</c:forEach>
+						    <div class="input_area">
+						    	<button type="submit" id="reply_btn">소감 남기기</button>
+						    </div>
+				  		</form>
+			 		</section>
+			  	</c:if>
+
+			 	<section class="replyList">
+				   <ol>
+				   
+
+				   	<!--<c:forEach items="${reply}" var="reply">
+					  <li>
+					      <div class="userInfo">
+					      	<span class="date"><fmt:formatDate value="${reply.repDate}" pattern="yyyy-MM-dd" /></span>
+					      </div>
+					      <div class="replyContent">${reply.reply}</div>
+					    </li>
+					</c:forEach>-->
+				   </ol>    
+				   <script>
+				   		replyList();
+				   </script>
+	
+					
+			 	</section>
+			</div>
         </section>
 
     <!-- Bootstrap -->
@@ -105,6 +186,37 @@
    
 <script>
 $(document).ready(function(){
+	$( ".star_rating label" ).click(function() {
+	     $(this).parent().children("label").removeClass("on");
+	     $(this).addClass("on").prevAll("label").addClass("on");
+	     return false;
+	});
+	ClassicEditor
+		.create(document.querySelector('#reply'),{
+			toolbar: {
+				  items: [
+				        'heading', '|',
+				        'fontfamily', 'fontsize', '|',
+				        'alignment', '|',
+				        'fontColor', 'fontBackgroundColor', '|',
+				        'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+				        'link', '|',
+				        'outdent', 'indent', '|',
+				        'bulletedList', 'numberedList', 'todoList', '|',
+				        'code', 'codeBlock', '|',
+				        'insertTable', '|',
+				        'uploadImage', 'blockQuote', '|',
+				        'undo', 'redo'
+				    ],
+				    shouldNotGroupWhenFull: true
+			}
+	    })						    		
+		.then( editor => {
+	        console.log( editor );
+		})
+		.catch(error=>{
+			console.error(error);
+	});
 	/* 이미지 정보 호출 */
 	let productCode = '<c:out value="${product.productCode}"/>';
 	let uploadResult = $(".carousel-inner");			
@@ -127,5 +239,7 @@ $(document).ready(function(){
 		});
 		uploadResult.html(str);						
 	});	
+	
 });	
+
 </script>

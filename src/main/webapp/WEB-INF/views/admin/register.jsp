@@ -11,7 +11,7 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
 </head>
@@ -169,11 +169,32 @@ $("#registerBtn").on("click",function(e){
 });
 /* 위지윅 적용 */
 ClassicEditor
-	.create(document.querySelector('#contents_textarea'))
+	.create(document.querySelector('#contents_textarea'),{
+		toolbar: {
+			  toolbar: [
+			        'heading', '|',
+			        'fontfamily', 'fontsize', '|',
+			        'alignment', '|',
+			        'fontColor', 'fontBackgroundColor', '|',
+			        'bold', 'italic', 'strikethrough', 'underline', 'subscript', 'superscript', '|',
+			        'link', '|',
+			        'outdent', 'indent', '|',
+			        'bulletedList', 'numberedList', 'todoList', '|',
+			        'code', 'codeBlock', '|',
+			        'insertTable', '|',
+			        'uploadImage', 'blockQuote', '|',
+			        'undo', 'redo'
+			    ],
+			    shouldNotGroupWhenFull: true
+		}
+	})
+	.then( editor => {
+		console.log( editor );
+	})
 	.catch(error=>{
 		console.error(error);
 	});
- 
+
 /*컨트롤러에서 카테고리 데이터 받기*/
  var jsonData = JSON.parse('${category}');
  var cateArr = new Array();
@@ -198,10 +219,10 @@ ClassicEditor
 	
  	/* 이미지 업로드 */
 	$("input[type='file']").on("change", function(e){
-		let formData = new FormData();
-		let fileInput = $('input[name="uploadFile"]');
-		let fileList = fileInput[0].files;
-		let fileObj = fileList[0];
+		var formData = new FormData();
+		var fileInput = $('input[name="uploadFile"]');
+		var fileList = fileInput[0].files;
+		var fileObj = fileList[0];
 		if(!fileCheck(fileObj.name, fileObj.size)){
 			return false;
 		}
@@ -225,7 +246,7 @@ ClassicEditor
 		});	
 	});
 	/* 크기,파일 업로드 체크 */
-	let regex = new RegExp("(.*?)\.(jpg|png)$");
+	var regex = new RegExp("(.*?)\.(jpg|png)$");
 	let maxSize = 5242880; 	
 	function fileCheck(fileName, fileSize){
 		if(fileSize >= maxSize){
@@ -251,9 +272,6 @@ ClassicEditor
 		let str = "";
 		$(uploadResultArr).each(function(i, obj){		
 			let fileCallPath = encodeURIComponent(obj.uploadPath.replace(/\\/g, '/') + "/s_" + obj.uuid + "_" + obj.fileName);
-			//replace 적용 하지 않아도 가능
-			//let fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
-			
 			str += "<div id='result_card'>";
 			str += "<img src='/display?fileName=" + fileCallPath +"'>";
 			str += "<div class='imgDeleteBtn' data-file='" + fileCallPath + "'>x</div>";

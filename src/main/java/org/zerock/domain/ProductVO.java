@@ -39,6 +39,14 @@ public class ProductVO {
 	/* 파일 이름 */
 	private String fileName;
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	public List<AttachImageVO> getImageList() {
 		return imageList;
 	}
